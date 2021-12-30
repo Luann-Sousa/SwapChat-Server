@@ -9,6 +9,7 @@ import { GetaAllRequestController } from '../controllers/Request/GetaAllRequestC
 import { GetOneRequestController } from '../controllers/Request/GetOneRequestController';
 import { UserAuthenticateController } from '../controllers/Authenticate/UserAuthenticateController';
 import { UpdateUserController } from '../controllers/User/UpdateUserController';
+import { DeletedUserController } from '../controllers/User/DeletedUserController';
 
 const userController = new UserCreateControler();
 const userGetController = new GetaAllUserController();
@@ -19,6 +20,7 @@ const requestGetController = new GetaAllRequestController();
 const requestGetOneControler = new GetOneRequestController();
 const authenticateController = new UserAuthenticateController();
 const updateuser = new UpdateUserController();
+const userDeleted = new DeletedUserController();
 
 const router = Router();
 
@@ -26,7 +28,8 @@ const router = Router();
 router.post('/users', userController.handle);
 router.get('/users', userGetController.handle);
 router.post('/users/signin', authenticateController.handle);
-router.put('/users/update/:id', updateuser.handle);
+router.put('/users/updated/:id', updateuser.handle);
+router.delete('/users/deleted/:id', userDeleted.handle);
 
 //endereço
 router.post('/address', addressController.handle);
