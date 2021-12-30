@@ -57,6 +57,8 @@ export class CreateAddress1640200905059 implements MigrationInterface {
             columnNames: ['user_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
         ],
       }),

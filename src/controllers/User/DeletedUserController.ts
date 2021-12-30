@@ -7,11 +7,14 @@ class DeletedUserController {
 
     const deletService = new DeletedUserService();
 
-    const userDeleted = deletService.execute(id);
+    const usuarioDeletado = deletService.execute(id);
+    if (usuarioDeletado instanceof Error) {
+      return response.json(usuarioDeletado.message);
+    }
 
-    return response.status(200).json({
+    return response.status(204).json({
       error: false,
-      user: userDeleted,
+      messeger: 'Usuário foi excluido com sucesso!',
     });
   }
 }

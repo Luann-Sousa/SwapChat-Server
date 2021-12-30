@@ -36,7 +36,11 @@ export class Address {
   @Column()
   user_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_id' }) //qual coluna dentro da minha tabela de videos que tou referenciando
   user: User;
   @CreateDateColumn()

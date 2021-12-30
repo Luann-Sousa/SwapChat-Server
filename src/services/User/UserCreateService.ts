@@ -1,5 +1,6 @@
 import { getCustomRepository } from 'typeorm';
 import { UserRepositorie } from '../../repositories/UserRepositorie';
+import bcripty from 'bcryptjs';
 
 interface IUserProps {
   name: string;
@@ -29,19 +30,21 @@ class CreateUserService {
   }: IUserProps) {
     const useReposotry = getCustomRepository(UserRepositorie);
 
-    const userAllexists = useReposotry.findOne({
+    const useremailAllexists = await useReposotry.findOne({
       email,
     });
 
-    if (userAllexists) {
+    if (useremailAllexists) {
       throw new Error('Já possui um usuário com este email tente outro !');
     }
+    const saltPassword = bcripty.genSaltSync(10);
+    const passwordHashSync = bcripty.hashSync('B4c0//', saltPassword);
 
     const user = useReposotry.create({
       name,
       username,
       email,
-      password,
+      password: passwordHashSync,
       sex,
       profession,
       about_me,
